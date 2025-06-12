@@ -1,0 +1,271 @@
+uchiyats@uchiyats-Super-Server:~/python_asr-notstft/11whisper_trf_wav$ python 02_train_nar_whisper_wav.py 
+MyE2EModel(
+  (fe): FeatureExtractor(
+    (convs): Sequential(
+      (0): Conv1d(1, 512, kernel_size=(10,), stride=(5,))
+      (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): GELU(approximate='tanh')
+      (3): Conv1d(512, 512, kernel_size=(3,), stride=(2,))
+      (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): GELU(approximate='tanh')
+      (6): Conv1d(512, 512, kernel_size=(3,), stride=(2,))
+      (7): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (8): GELU(approximate='tanh')
+      (9): Conv1d(512, 512, kernel_size=(3,), stride=(2,))
+      (10): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (11): GELU(approximate='tanh')
+      (12): Conv1d(512, 512, kernel_size=(3,), stride=(2,))
+      (13): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (14): GELU(approximate='tanh')
+      (15): Conv1d(512, 512, kernel_size=(2,), stride=(2,))
+      (16): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (17): GELU(approximate='tanh')
+      (18): Conv1d(512, 512, kernel_size=(2,), stride=(2,))
+      (19): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (20): GELU(approximate='tanh')
+    )
+    (ln): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+    (linear): Linear(in_features=512, out_features=512, bias=True)
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (encoder): Encoder(
+    (pos_emb): Embedding(4000, 512)
+    (convs): Sequential(
+      (0): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Dropout(p=0.1, inplace=False)
+      (4): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (6): ReLU()
+      (7): Dropout(p=0.1, inplace=False)
+      (8): Conv1d(512, 512, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+      (9): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (10): ReLU()
+      (11): Dropout(p=0.1, inplace=False)
+    )
+    (blocks): ModuleList(
+      (0-11): 12 x ResidualAttentionBlock(
+        (attn): MultiHeadAttention(
+          (query): Linear(in_features=512, out_features=512, bias=True)
+          (key): Linear(in_features=512, out_features=512, bias=False)
+          (value): Linear(in_features=512, out_features=512, bias=True)
+          (out): Linear(in_features=512, out_features=512, bias=True)
+          (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (attn_ln): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (pos_ffn): PositionwiseFeedForward(
+          (w_1): Conv1d(512, 2048, kernel_size=(5,), stride=(1,), padding=(2,))
+          (w_2): Conv1d(2048, 512, kernel_size=(1,), stride=(1,))
+          (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (decoder): Decoder(
+    (blocks): ModuleList(
+      (0-11): 12 x ResidualAttentionBlock(
+        (attn): MultiHeadAttention(
+          (query): Linear(in_features=512, out_features=512, bias=True)
+          (key): Linear(in_features=512, out_features=512, bias=False)
+          (value): Linear(in_features=512, out_features=512, bias=True)
+          (out): Linear(in_features=512, out_features=512, bias=True)
+          (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (attn_ln): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (cross_attn): MultiHeadAttention(
+          (query): Linear(in_features=512, out_features=512, bias=True)
+          (key): Linear(in_features=512, out_features=512, bias=False)
+          (value): Linear(in_features=512, out_features=512, bias=True)
+          (out): Linear(in_features=512, out_features=512, bias=True)
+          (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (cross_attn_ln): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (pos_ffn): PositionwiseFeedForward(
+          (w_1): Conv1d(512, 2048, kernel_size=(5,), stride=(1,), padding=(2,))
+          (w_2): Conv1d(2048, 512, kernel_size=(1,), stride=(1,))
+          (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+  )
+  (classifier): Linear(in_features=512, out_features=2921, bias=False)
+)
+epoch 1/20:
+    train loss: 6.790662
+    train token error rate: 91.176502 %
+    validation loss: 4.621934
+    validation token error rate: 67.079693 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>レ対がったにのつか形は一在のたに対するのとがである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>人対のフリのに理現地をのことがいは作れはそしたくりもの識でものければがしもなたらである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>大るも人ともなとにのくでつもはたらなにね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>同識の最はシの考もくも境にしたもの一れた作に観在をがかわなければならない<eos>
+epoch 2/20:
+    train loss: 3.378562
+    train token error rate: 57.625080 %
+    validation loss: 2.827298
+    validation token error rate: 49.549831 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサカにも使関係は識配のかに対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>人会の不フはりもにより天気をのもとが多いがそれはそしたおくりもは必要でもなければ僕場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>もえる後にと思えないとにの別もよはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>ノしるの最中は一シもを不も心長にしかもできるだけジ続に感在を使わなければならない<eos>
+epoch 3/20:
+    train loss: 2.277770
+    train token error rate: 45.014419 %
+    validation loss: 2.245559
+    validation token error rate: 43.037975 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が作観にもつ関係は地材が中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年配の風ー不はくりもより研金をこのむことがおいがそれはそしたをくり物は必要でもなければ僕場シもないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>もえるゴと思えない後みの区別もよわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>ノ主術の最中は一者も感を不も心張にしかもできるだけジ族に感じをわなければならない<eos>
+epoch 4/20:
+    train loss: 1.737160
+    train token error rate: 38.103735 %
+    validation loss: 1.940481
+    validation token error rate: 38.932965 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が発家にも使関係は式在が中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年配の風不は遅ものより天金をこのむこが多いがそれはそしたお遅りものは必要でもなければ僕場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>もえるごみと思えないとみの区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>同術の最中は医者も観を不も新張にしかもできるだけジ属に管者をわなければならない<eos>
+epoch 5/20:
+    train loss: 1.366990
+    train token error rate: 33.059565 %
+    validation loss: 1.760039
+    validation token error rate: 36.566233 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサ家にも使関係は式在が中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの夫婦は送もより天金をこむことが多いやそれはそしてを送り物は必要でもなければ場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>覚えるゴと思えない込みの区別もよくからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農子ずの最中は医者も観をフも新長にしかもできるだけジ族に観者を扱わなければならない<eos>
+epoch 6/20:
+    train loss: 1.082907
+    train token error rate: 28.867448 %
+    validation loss: 1.741117
+    validation token error rate: 35.505438 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサ家にもつ関係は式在が描に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年配の夫婦は繰り物のより研金を好むことが多いがそれはそうしたお送り物は必要でもなければオ場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>もえるゴと思えない五みの区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農し術の最中は医者も関を不も新情にしかもできるだけジ族に観者を扱わなければならない<eos>
+epoch 7/20:
+    train loss: 0.852579
+    train token error rate: 25.349778 %
+    validation loss: 1.692279
+    validation token error rate: 34.547156 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサ家にも使関係は識在が中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>連配の夫婦はくり物より研金を好むことが多いがそれはそしたおくり物のはが必要でもなければお場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>モえるご身と思えないゴみの区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農し術の際中は医者も感を不も心重にしかもできるだけジ属に感者を扱わなければならない<eos>
+epoch 8/20:
+    train loss: 0.669834
+    train token error rate: 22.409800 %
+    validation loss: 1.723992
+    validation token error rate: 34.422357 %
+    (Decay learning rate: 1.000000 -> 0.500000)
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が即家にも使関係は色材が側かに対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年輩の夫婦は送りも寄り研金をこむことが多いがそれはそしを送り物は必要でもなければ奥場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思える言んと思えない込みの区別つもよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>脳し術の最中は医者も感をも真長にしかもできるだけジ族に患者を扱かわなければならない<eos>
+epoch 9/20:
+    train loss: 0.369728
+    train token error rate: 16.729766 %
+    validation loss: 1.622797
+    validation token error rate: 32.612765 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が殺家にも使関係は指材が側中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年配の夫婦は送りもより研金を好むことが多いがそれはそうしたお送り者のは必要でもなければ奥場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思えるごんと思えないごみの区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>無シ術の最中は医シ者も関をも真重にしかもできるだけ事属に感者を扱わなければならない<eos>
+epoch 10/20:
+    train loss: 0.257471
+    train token error rate: 14.477057 %
+    validation loss: 1.642609
+    validation token error rate: 32.260653 %
+    (Decay learning rate: 0.500000 -> 0.250000)
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が作家にもつ関係は色在が高かに対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年輩の夫婦は送りもより研金を好むことが多いやそれはそうしてを送り物は必要でもなければ奥場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思えるごんと思えない込みの区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農主術の最中は遺者も肝をも慎重にしかも出きるだけジ属に患者を扱わなければならない<eos>
+epoch 11/20:
+    train loss: 0.149779
+    train token error rate: 12.075947 %
+    validation loss: 1.660843
+    validation token error rate: 31.511856 %
+    (Decay learning rate: 0.250000 -> 0.125000)
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>ヴ体がサ家にも使関係は色材が高中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年配の夫婦は送りもより元金を好むことが多いがそれはそうしお送り物のは必要でもなければ奥場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>モえるゴんと思えない込みの区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農主術の再中は遺者も冠をも真重にしかも出きるだけ神族に患者を扱わなければならない<eos>
+epoch 12/20:
+    train loss: 0.096515
+    train token error rate: 10.879845 %
+    validation loss: 1.666869
+    validation token error rate: 31.199857 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサ家にも使関係は色材が側中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年輩の夫婦は送り物より元金を好むことが多いがそれはそうした送り物は必要でもなければ奥場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>覚えるごんと思えない込みの区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>無主術の最中は医者も感をも慎重にしかも出きるだけ神族に感者を扱わなければならない<eos>
+    Early stopping. (early_stop_threshold = 3)
+---------------Summary------------------
+Final epoch model -> ./exp_train_large/char_model_conv_nar/final_model.pt
+    train loss: 0.096515
+    train token error rate: 10.879845 %
+    validation loss: 1.666869
+    validation token error rate: 31.199857 %
+Best epoch model (9-th epoch) -> ./exp_train_large/char_model_conv_nar/best_model.pt
+    train loss: 0.369728
+    train token error rate: 16.729766 %
+    validation loss: 1.622797
+    validation token error rate: 32.612765 %
+

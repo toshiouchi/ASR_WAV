@@ -1,0 +1,290 @@
+uchiyats@uchiyats-Super-Server:~/python_asr-notstft/10transformer_nar_fbank_half$ python 02_train_nar_fbank.py 
+/home/uchiyats/.local/lib/python3.12/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+MyE2EModel(
+  (encoder): Encoder(
+    (pos_emb): Embedding(3000, 512)
+    (convs): Sequential(
+      (0): Conv1d(80, 256, kernel_size=(5,), stride=(2,), padding=(2,), bias=False)
+      (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Dropout(p=0.1, inplace=False)
+      (4): Conv1d(256, 512, kernel_size=(5,), stride=(2,), padding=(2,), bias=False)
+      (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (6): ReLU()
+      (7): Dropout(p=0.1, inplace=False)
+      (8): Conv1d(512, 512, kernel_size=(5,), stride=(2,), padding=(2,), bias=False)
+      (9): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (10): ReLU()
+      (11): Dropout(p=0.1, inplace=False)
+    )
+    (transformer_encoder): TransformerEncoder(
+      (layers): ModuleList(
+        (0-23): 24 x TransformerEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=512, out_features=512, bias=True)
+          )
+          (linear1): Linear(in_features=512, out_features=2048, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (linear2): Linear(in_features=2048, out_features=512, bias=True)
+          (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+          (dropout1): Dropout(p=0.1, inplace=False)
+          (dropout2): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+    )
+  )
+  (classifier): Linear(in_features=512, out_features=2921, bias=False)
+)
+epoch 1/20:
+    train loss: 5.898192
+    train token error rate: 78.417440 %
+    validation loss: 4.441624
+    validation token error rate: 60.795151 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>分体さたにも関ては識ががかに体するのとなじである
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>現パのずはプりもよりて気よこのもことがをいなされはそしたくりもしでもなければおしもないからである
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>るほとわなこみのくでもよとはからないよね
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>しの在ちは社も考をフもし常にかもてけるでて自ず界をかなればならない
+epoch 2/20:
+    train loss: 3.818194
+    train token error rate: 64.184947 %
+    validation loss: 3.738884
+    validation token error rate: 61.307720 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>無体作たにも観現は識在が学かに対するのと同自である<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>現対のフはプり物より定をこののことがいなそれはそしたりもでもなればお場私もなからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>我える本となこ別もるとはからないうね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>無主術の作中は一社も考をフも真境に主己もお的る体て自作に界でかなればならない<eos>
+epoch 3/20:
+    train loss: 3.220774
+    train token error rate: 58.641204 %
+    validation loss: 3.291063
+    validation token error rate: 56.431628 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>分体が作ったにも観係は識がが中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>現パの風はップりもにより定きよをこのことのいがそれは相したをりもは必でもなければ<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>える後と前ないこ見のッ別もよくはからないうね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>ノ主術の作中は一社も考を踏も身常にしかもてきるだけ自つに行界では使わなければならない<eos>
+epoch 4/20:
+    train loss: 2.827751
+    train token error rate: 54.467725 %
+    validation loss: 3.007396
+    validation token error rate: 54.760207 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>分体がサ他に物間ゲは識がの中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>現体の風はクりもより現金を子のことがいなそれはそしたをりものは必要でもなければ僕場しもないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思える語と思ない込みの別もよはからないうね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>の応習の最中は者目間を踏も心情に近かもてけるだけ事ずに間女を使わなければならない<eos>
+epoch 5/20:
+    train loss: 2.512455
+    train token error rate: 50.731967 %
+    validation loss: 2.761961
+    validation token error rate: 51.702621 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>分体なさかに物関係は識作ががかに対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年体の風フはりもより人金をこのことがいがされは相したりもは必要でもなければお場もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>もえるゴみと思えない込みの別つもよとはからないうね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>無主術の作中は一者も環を踏も新境に主かもてきるだけ自つに関者を使わなければならない<eos>
+epoch 6/20:
+    train loss: 2.235470
+    train token error rate: 47.297283 %
+    validation loss: 2.625635
+    validation token error rate: 49.973257 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサっ観にも関と係は式際がが中に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年体の風はくり問より見金を子のことが多いがそれはそした送りものは必要でもなければ目ま女もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>もえる後と思えない込の別もよはからないうね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農主の際中は一者目感踏も進常にもてきるだけ事つ入感女を使わなければならないる<eos>
+epoch 7/20:
+    train loss: 1.991559
+    train token error rate: 43.999720 %
+    validation loss: 2.456306
+    validation token error rate: 47.673382 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が参家にも関係は式際がが限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>全体の風フはくりもより現金を行のことが法多いがそれは相したを来りものは出必要でもなければ場所もなからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思えル込と思えない込みのく区別もよくはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農主術の際中は一者も感号分も心情に近かもてきるだけ事族に感者をつかわなければならないる<eos>
+epoch 8/20:
+    train loss: 1.769087
+    train token error rate: 40.887835 %
+    validation loss: 2.402162
+    validation token error rate: 46.844357 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がさ観にも関係は識際が限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年対の風フはックりもより権金を子のむもことが法いがそれはそした遅りものは必要よでもなければおば所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思えル語と思えない込のく別もよくわからないね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>四収術の再中は一者も感も踏も心情にしかも出きるだ人ずに環者を使わなければならない<eos>
+epoch 9/20:
+    train loss: 1.571180
+    train token error rate: 37.994394 %
+    validation loss: 2.301234
+    validation token error rate: 44.807452 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>運体がサっ家にも関係は地画がかに対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年バの風フはぐりもより元金を好のとがいがそれはそした遅りものは必要でもなければば所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>もるもと思えない込の別もよくはからないうね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農集術の最中はい者目感を踏も新情に近かも持できるだけ人族に彼状をつ使わなければならない<eos>
+epoch 10/20:
+    train loss: 1.397331
+    train token error rate: 35.392767 %
+    validation loss: 2.272332
+    validation token error rate: 44.067570 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>分体が去っ観にも関係は識際画のかに対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年体の風不は来りもより元金を子のもことが多いがそれはそしてくりものは必要でもなけれ多場しもないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思える喜とえない込みの別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農種術の際中は一医者も感を踏も新張に気かもできるだけ事族に感じでをつ使わなければならない<eos>
+epoch 11/20:
+    train loss: 1.236939
+    train token error rate: 33.005310 %
+    validation loss: 2.173918
+    validation token error rate: 43.193974 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が去下にもつ関係は識がが限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの風付はぐりもみより前を子のとが多いがそれは想したを送る物のは必要でもなければ多く場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思える喜みと思えない込の区別も良くはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>ノう週のサ中は一遺者も感護踏も新長にしかもできるだけじ族に感じをかわなければならない<eos>
+epoch 12/20:
+    train loss: 1.095449
+    train token error rate: 30.777176 %
+    validation loss: 2.162336
+    validation token error rate: 41.883580 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が参観にもつ関係は識細がが限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの風府はッくりもよりケ金を好とが多いがそれは装したをくりものは必要でもなければ多場しもないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>えるも見とえない込の区別もよくはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農集術の最中は遺者も感を護踏も心上にしかも出きるだけ自束に感者を暑かわなければならない<eos>
+epoch 13/20:
+    train loss: 0.972992
+    train token error rate: 28.799303 %
+    validation loss: 2.146100
+    validation token error rate: 41.584953 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>分体が三家もつ関係は識際がかに対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの風ー府はくりもみより見気を子のもとが多いがそれはそした多遅りものは必要でもなければ場しもないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>えるごと思えない込の区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農う酒術の最中は者も感を踏も信情に仕かもできるだけ自束に感じを暑使わなければならない<eos>
+epoch 14/20:
+    train loss: 0.866691
+    train token error rate: 27.043555 %
+    validation loss: 2.171981
+    validation token error rate: 41.170440 %
+    (Decay learning rate: 1.000000 -> 0.500000)
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサ家にもつ関係は識解のが限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの夫婦はぐりもより元金を子のとが多ういがそれはそした起送りものは必要でもなければ含場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>える文みと思えない込身の区別もよくわからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農う集術の際中は医者も環護踏も新情に四下も持ってきるだけ事束に感じ者暑使わなければならない<eos>
+epoch 15/20:
+    train loss: 0.622239
+    train token error rate: 22.409918 %
+    validation loss: 2.033046
+    validation token error rate: 39.066679 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体がサ何にもつ関係は指細がが限に対するもと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの夫婦はっグりものより現金を好のことが多いがそれはそしたを置遅りものは必要でもなければ場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>えるごみと思えない込の区別もよくはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農集術の再中は医しも感音護踏も信情にしかも出きるだ事術に感じ者を暑使わなければならない<eos>
+epoch 16/20:
+    train loss: 0.536104
+    train token error rate: 20.771703 %
+    validation loss: 2.077198
+    validation token error rate: 39.062221 %
+    (Decay learning rate: 0.500000 -> 0.250000)
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が参家にもつ関係は指機細画が限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの風府は送りもより現金を子むとが多いがそれはそし多送り物のは必要でもなければ多含場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>我える込みと思えない込身の区別もよくはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>ローシ術ツの最中は一遺者務感怖も信情にしかも持出きるだけジ着に感者をつ使わなければならない<eos>
+epoch 17/20:
+    train loss: 0.416846
+    train token error rate: 18.332484 %
+    validation loss: 2.047399
+    validation token error rate: 38.460510 %
+    (Decay learning rate: 0.250000 -> 0.125000)
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が参家もつ関係は指細がが限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの夫府は送りもより現金を子のとが多いがそれはそした送りものは必要でもなければ置場しもないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>えるゴむと思えない込身の区別もよくはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>農集術の最中は一医緒務感を踏も信張に四かも出きるだけじ着に感者をつ使わなければならない<eos>
+epoch 18/20:
+    train loss: 0.353008
+    train token error rate: 16.969699 %
+    validation loss: 2.064670
+    validation token error rate: 38.157426 %
+dev      reference:   <sos>文体が作家に持つ関係は色彩が画家に対するのと同じである<eos>
+dev      hypothesis:  <sos>文体が三家にもつ関係は識細画の限に対するのと同じである<eos>
+dev      reference:   <sos>年輩の夫婦は贈り物より現金を好むことが多いがそれはそうした贈り物は必要でもなければ置く場所もないからである<eos>
+dev      hypothesis:  <sos>年パの夫府はくりもより現金を子のとが多いがそれは損し送りものは必要でもなければ場所もないからである<eos>
+dev      reference:   <sos>燃えるゴミと燃えないゴミの区別もよく分からないよね<eos>
+dev      hypothesis:  <sos>思えるゴみと思えない込のく別もよくはからないよね<eos>
+dev      reference:   <sos>脳手術の最中は医者も看護婦も慎重にしかもできるだけ迅速に患者を扱わなければならない<eos>
+dev      hypothesis:  <sos>ノーシ術ツの最中は一医者も感踏も慎重に司下も出きるだけジ束に感情を暑使わなければならない<eos>
+    Early stopping. (early_stop_threshold = 3)
+---------------Summary------------------
+Final epoch model -> ./exp_train_large/char_model_trf_nar/final_model.pt
+    train loss: 0.353008
+    train token error rate: 16.969699 %
+    validation loss: 2.064670
+    validation token error rate: 38.157426 %
+Best epoch model (15-th epoch) -> ./exp_train_large/char_model_trf_nar/best_model.pt
+    train loss: 0.622239
+    train token error rate: 22.409918 %
+    validation loss: 2.033046
+    validation token error rate: 39.066679 %
+
